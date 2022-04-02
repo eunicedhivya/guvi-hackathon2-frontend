@@ -1,5 +1,16 @@
 import CartItem from "../components/CartItem";
+import { useState } from "react";
 function Cart({ cartItems, removeItem }) {
+  const totalItem = cartItems.length;
+  const [itemCostList, setItemCostList] = useState([]);
+  const sumTotalItems =
+    totalItem === 0
+      ? "0"
+      : cartItems
+          .map((items) => parseFloat(items.productPrice))
+          .reduce((a, b) => a + b);
+  const shipping = totalItem === 0 ? "0" : 20.0;
+
   return (
     <div className="container">
       <h2>Cart</h2>
@@ -18,9 +29,10 @@ function Cart({ cartItems, removeItem }) {
                       console.log(cartItm);
                       return (
                         <CartItem
-                          key={cartItm.id}
+                          key={cartItm._id}
                           cartItm={cartItm}
                           removeItem={removeItem}
+                          setItemCostList={setItemCostList}
                         />
                       );
                     })}
@@ -35,7 +47,26 @@ function Cart({ cartItems, removeItem }) {
                   <ul
                     className="list-group list-group-flush"
                     style={{ minHeight: "140px" }}
-                  ></ul>
+                  >
+                    <li className="d-flex justify-content-between">
+                      <span>Total Items</span>
+                      <span>{totalItem}</span>
+                    </li>
+                    <li className="d-flex justify-content-between">
+                      <span>Subtotal</span>
+                      <span>${sumTotalItems}</span>
+                    </li>
+                    <li className="d-flex justify-content-between">
+                      <span>Shipping</span>
+                      <span>${shipping}</span>
+                    </li>
+                    <li className="d-flex justify-content-between">
+                      <span>Total(Incl. taxes)</span>
+                      <span>
+                        ${totalItem === 0 ? "0" : sumTotalItems + shipping}
+                      </span>
+                    </li>
+                  </ul>
                 </div>
               </div>
             </div>

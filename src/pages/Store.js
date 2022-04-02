@@ -1,7 +1,7 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Product from "../components/Product";
 
-function Store({ productData, addItem }) {
+function Store({ productList, addItem }) {
   return (
     <div className="container mt-5">
       <div className="d-flex justify-content-between align-items-center mb-3">
@@ -9,9 +9,9 @@ function Store({ productData, addItem }) {
         <span className="custom-badge text-uppercase">See More</span>
       </div>
       <div className="row">
-        {productData.map((product) => {
+        {productList.map((product) => {
           return (
-            <Product key={product.id} product={product} addItem={addItem} />
+            <Product key={product._id} product={product} addItem={addItem} />
           );
         })}
       </div>

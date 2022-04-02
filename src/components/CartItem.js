@@ -44,7 +44,7 @@ function CartItem({ cartItm, removeItem }) {
               })}
             </select>
             <button
-              onClick={() => removeItem(cartItm.id)}
+              onClick={() => removeItem(cartItm._id)}
               className="btn btn-sm btn-primary"
             >
               Delete
@@ -68,10 +68,9 @@ function CartItem({ cartItm, removeItem }) {
               format="dd-MM-yy h:mm a"
             />
           </div>
-          <hr />
-          <div className="">
+          <div className="mt-3 alert alert-warning">
             No of Hours: {OrderTime} x Price: {cartItm.productPrice} x No of
-            Item: {noItems} = {costItem}
+            Item: {noItems} = ₹{costItem}
           </div>
         </div>
       </div>
